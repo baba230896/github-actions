@@ -13,3 +13,7 @@ jobs:
            who-to-greet: Yatish
       - name: Log greet time
         run: echo "${{ steps.greet.outputs.time }}"
+      - name: Checkout Code
+        uses: actions/checkout@v2.1.0
+      - name: List directory
+        run: ls -la
