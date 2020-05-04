@@ -22,3 +22,9 @@ jobs:
           git status
           git remote -v 
           git branch
+          echo $RANDOM >> sample_file
+          git config user.name 'baba230896'
+          git config user.email 'yatish1996ss@gmail.com'
+          git add sample_file
+          git commit -m "sample_file"
+          git push origin ${{ github.ref }}:master
