@@ -17,3 +17,8 @@ jobs:
         uses: actions/checkout@v2.1.0
       - name: List directory
         run: ls -la
+      - name: Git commands
+        run: |
+          git status
+          git remote -v 
+          git branch
