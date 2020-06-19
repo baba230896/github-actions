@@ -1,0 +1,11 @@
+name: IP - AWS SG
+
+on: [push]
+
+jobs:
+  find-ip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo string
+        run: |
+          ip a
