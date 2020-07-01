@@ -1,0 +1,35 @@
+name: First Workflow
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+
+jobs:
+  run-shell-command:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo string
+        run:  echo "Hello! I'm first workflow"
+      - name: Today's date
+        run:  date
+      - name: multiline scripts
+        run: |
+          npm -v
+          node -v
+  run-different-shell:
+     runs-on: ubuntu-latest
+     steps:
+       - name: run Python
+         run: |
+           import platform
+           print (platform.processor())
+         shell: python
+  run-windows-depended-job:
+      runs-on: windows-latest
+      needs: ['run-shell-command','run-different-shell']
+      steps:
+        - name: pwd
+          run: pwd
+          shell: bash
