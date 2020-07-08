@@ -16,7 +16,14 @@ jobs:
         echo ${{ steps.ip.outputs.ipv4 }}
         echo ${{ steps.ip.outputs.ipv6 }}
 
-    - name: Print Secret
+    - name: Get IPv4
       run: |
-        echo "${{ secrets.TESTSECRET }}" > myfile
-        cat myfile
+        echo ::set-env name=IPv4::$( curl https://api.ipify.org )
+
+    - name: Set Allowed_SOurces
+      run: |
+        echo ::set-env name=ALLOWED_SOURCES::${IPv4}/32
+
+    - name: Build
+      run: |
+         echo "$ALLOWED_SOURCES"
