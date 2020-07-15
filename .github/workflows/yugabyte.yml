@@ -1,0 +1,38 @@
+name: YugabyteDB Service Example
+on: push
+
+jobs:
+  # Label of the runner job
+  runner-job:
+    # You must use a Linux environment when using service containers or container jobs
+    runs-on: ubuntu-latest
+
+    # Service containers to run with `runner-job`
+    services:
+      # Label used to access the service container
+      yugabytedb:
+        # Docker Hub image
+        image: yugabytedb/yugabyte:latest
+        # Set health checks to wait until postgres has started
+        options: >-
+          --daemon=false
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 7000:7000
+          - 9000:9000
+          - 9042:9042
+          - 5433:5433
+          - 7100:7100
+          - 9100:9100
+      yugabytedb-client:
+        image: yugabytedb/yugabyte-client:latest
+
+    steps:
+      # Downloads a copy of the code in your repository before running CI tests
+      - name: Check UI
+        run: curl --head http://localhost:7100
+
+      - name: docker
+        run: |
+          docker ps
+          docker exec -it yugabytedb-client -- ysqlsh yugabytedb
