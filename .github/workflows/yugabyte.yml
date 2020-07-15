@@ -15,7 +15,8 @@ jobs:
         image: yugabytedb/yugabyte:latest
         # Set health checks to wait until postgres has started
         options: >-
-          --daemon=false
+          --entrypoint ["bin/yugabyted", "start", "--daemon=false"]
+          --hostname yugabytedb
         ports:
           # Maps tcp port 5432 on service container to the host
           - 7000:7000
@@ -26,11 +27,13 @@ jobs:
           - 9100:9100
       yugabytedb-client:
         image: yugabytedb/yugabyte-client:latest
+        options: >-
+          --name yugabytedb-client
 
     steps:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check UI
-        run: curl --head http://localhost:7100
+        run: curl --head http://localhost:7000
 
       - name: docker
         run: |
