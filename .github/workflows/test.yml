@@ -10,7 +10,9 @@ jobs:
     - run: true
     - run: echo runs on success
       if: ${{ success() }}
-    - run: false
+    - run: echo runs on failure
+      if: ${{ failure() }}
+    - run: exit 1
     - run: echo runs on failure
       if: ${{ failure() }}
     - run: echo runs on success
