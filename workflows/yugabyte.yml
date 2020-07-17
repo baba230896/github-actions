@@ -15,7 +15,7 @@ jobs:
         image: yugabytedb/yugabyte:latest
         # Set health checks to wait until postgres has started
         options: >-
-          --entrypoint ["bin/yugabyted", "start", "--daemon=false"]
+          --entrypoint bin/yugabyted
           --hostname yugabytedb
         ports:
           # Maps tcp port 5432 on service container to the host

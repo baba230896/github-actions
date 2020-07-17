@@ -16,7 +16,3 @@ jobs:
         echo ${{ steps.ip.outputs.ipv4 }}
         echo ${{ steps.ip.outputs.ipv6 }}
 
-    - name: Print Secret
-      run: |
-        echo "${{ secrets.TESTSECRET }}" > myfile
-        cat myfile

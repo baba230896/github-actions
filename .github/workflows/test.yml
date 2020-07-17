@@ -1,0 +1,15 @@
+name: test
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - run: false
+    - run: echo runs on success or failure
+      if: succeeded() || failed()
+    - run: echo runs always, even if the prior step was canceled
+      if: always()
+
